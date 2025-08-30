@@ -29,7 +29,6 @@ class MyImagesTable
                     ->schema([
                         ImageColumn::make('image')->square()
                             ->height(150)->extraImgAttributes(['class' => 'w-full rounded']),
-
                         TextColumn::make('title')
                             ->weight(FontWeight::SemiBold)
                             ->size('lg'),
