@@ -12,12 +12,12 @@ return new class extends Migration {
     {
         Schema::create('favorite_images', function (Blueprint $table) {
             $table->id();
-            $table->integer("userId");
-            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer("myImage")->nullable();
-            $table->foreign('myImage')->references('id')->on('my_images')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('imageType', ['myImage', 'api']);
-            $table->string('apiImageUrl')->nullable();
+            $table->unsignedBigInteger("user_id");
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger("my_image_id")->nullable();
+            $table->foreign('my_image_id')->references('id')->on('my_images')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('image_type', ['myImage', 'api']);
+            $table->string('api_image_url')->nullable();
             $table->timestamps();
         });
     }
