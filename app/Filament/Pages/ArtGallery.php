@@ -54,6 +54,7 @@ class ArtGallery extends Page
             ? 'https://api.artic.edu/api/v1/artworks/search'
             : 'https://api.artic.edu/api/v1/artworks';
 
+
         $params = [
             'page'   => $this->pageNumber,
             'limit'  => $this->perPage,

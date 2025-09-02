@@ -1,12 +1,15 @@
-<x-filament::page>
-    <div class="space-y-6">
+<x-filament::page class="artworks-page">
 
+    {{-- Include CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/artworks.css') }}">
+
+    <div>
         {{-- Search bar --}}
-        <div class="flex items-center gap-3">
-            <x-filament::input.wrapper class="w-full">
+        <div class="artworks-search">
+            <x-filament::input.wrapper class="artworks-search-wrapper">
                 <x-filament::input
                     wire:model.debounce.500ms="search"
-                    placeholder="Search Art Institute of Chicago artworks (e.g., Monet, portrait, landscape)…"
+                    placeholder="Search Art Institute of Chicago artworks…"
                 />
             </x-filament::input.wrapper>
 
@@ -15,58 +18,37 @@
             </x-filament::button>
         </div>
 
-        {{-- Results meta --}}
-        <div class="text-sm text-gray-500">
-            @if($pagination)
-                Page {{ $pagination['current_page'] ?? $pageNumber }} of {{ $pagination['total_pages'] ?? $pageNumber }}
-            @endif
-            @if($iiifBase)
-                <span class="ml-2">• IIIF: {{ $iiifBase }}</span>
-            @endif
-        </div>
-
-        {{-- Grid of artworks --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {{-- Grid --}}
+        <div class="artworks-grid">
             @forelse($artworks as $art)
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
-                    <div class="aspect-[4/3] bg-gray-100 flex items-center justify-center">
+                <div class="artwork-card">
+                    {{-- Image --}}
+                    <div class="artwork-image">
                         @if($art['image_url'])
-                            <img
-                                src="{{ $art['image_url'] }}"
-                                alt="{{ $art['title'] }}"
-                                class="w-full h-full object-cover"
-                                loading="lazy"
-                            >
+                            <img src="{{ $art['image_url'] }}" alt="{{ $art['title'] }}">
                         @else
-                            <div class="text-gray-400 text-sm">No image</div>
+                            <span>No image</span>
                         @endif
                     </div>
 
-                    <div class="p-4 space-y-1">
-                        <div class="font-semibold leading-snug">
-                            {{ $art['title'] }}
-                        </div>
+                    {{-- Content --}}
+                    <div class="artwork-content">
+                        <h3 class="artwork-title">{{ $art['title'] }}</h3>
                         @if($art['artist'])
-                            <div class="text-sm text-gray-600">
-                                {!! nl2br(e($art['artist'])) !!}
-                            </div>
+                            <p class="artwork-artist">{!! nl2br(e($art['artist'])) !!}</p>
                         @endif
                         @if($art['date_display'])
-                            <div class="text-xs text-gray-500">
-                                {{ $art['date_display'] }}
-                            </div>
+                            <p class="artwork-date">{{ $art['date_display'] }}</p>
                         @endif
                     </div>
                 </div>
             @empty
-                <div class="col-span-full text-center text-gray-500 py-16">
-                    No artworks found.
-                </div>
+                <div class="artworks-empty">No artworks found.</div>
             @endforelse
         </div>
 
-        {{-- Pagination controls --}}
-        <div class="flex items-center justify-center gap-3">
+        {{-- Pagination --}}
+        <div class="artworks-pagination">
             <x-filament::button
                 wire:click="prevPage"
                 :disabled="$pagination && ($pagination['current_page'] ?? $pageNumber) <= 1"

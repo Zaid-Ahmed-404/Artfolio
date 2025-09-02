@@ -1,0 +1,107 @@
+/* artworks.css */
+
+/* Page wrapper */
+.artworks-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px;
+}
+
+/* Search bar container */
+.artworks-search {
+    display: flex;
+    flex-direction: row;   /* ✅ put input + button in same row */
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+/* Make input expand */
+.artworks-search-wrapper {
+    flex: 1;
+}
+
+/* Grid container */
+.artworks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+/* Card */
+.artwork-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card image */
+.artwork-image {
+    height: 192px;
+    width: 100%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.artwork-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Card content */
+.artwork-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.artwork-title {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.artwork-artist {
+    color: #4b5563;
+    font-size: 12px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.artwork-date {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Empty state */
+.artworks-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #6b7280;
+    padding: 64px 0;
+}
+
+/* Pagination */
+.artworks-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
