@@ -15,13 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
-        //service binding
-        $this->app->bind(ImageServicesInterface::class, ImageServices::class);
-
-
-        //repostory binding
-        $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
 
     }
 

@@ -9,20 +9,31 @@ use App\Models\FavoriteImage;
 class ImageController extends Controller
 {
     //
-
-    private $imageServicesInterface;
-    public function __construct(ImageServicesInterface $imageServicesInterface)
-    {
-        $this->imageServicesInterface = $imageServicesInterface;
-    }
     public function saveFavoriteImage($userId, $myImageId, $imageType, $apiImageUrl)
     {
-        return $this->imageServicesInterface->saveFavoriteImage($userId, $myImageId, $imageType, $apiImageUrl);
+        if ($imageType === "myImage") {
+            $favoriteImage = FavoriteImage::where([['user_id', $userId], ['my_image_id', $myImageId]])->firstOrNew();
+            $favoriteImage->user_id = $userId;
+            $favoriteImage->my_image_id = $myImageId;
+            $favoriteImage->image_type = "myImage";
+            $favoriteImage->save();
+            return $favoriteImage;
+        } else if ($imageType === "api") {
+            $favoriteImage = FavoriteImage::where([['user_id', $userId], ['api_image_url', $apiImageUrl]])->firstOrNew();
+            $favoriteImage->user_id = $userId;
+            $favoriteImage->api_image_url = $apiImageUrl;
+            $favoriteImage->image_type = "api";
+            $favoriteImage->save();
+            return $favoriteImage;
+        } else {
+            return null;
+        }
+
     }
 
     public function deleteFavoriteImage(FavoriteImage $favoriteImage)
     {
-        return $this->imageServicesInterface->deleteFavoriteImage($favoriteImage);
+        $favoriteImage->delete();
     }
 
 }

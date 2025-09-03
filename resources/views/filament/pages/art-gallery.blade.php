@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/artworks.css') }}">
 
     <div>
-        {{-- Search bar --}}
+        {{-- Search Bar --}}
         <div class="artworks-search">
             <x-filament::input.wrapper class="artworks-search-wrapper">
                 <x-filament::input
@@ -18,14 +18,41 @@
             </x-filament::button>
         </div>
 
-        {{-- Grid --}}
+        {{-- Artworks Grid --}}
         <div class="artworks-grid">
             @forelse($artworks as $art)
                 <div class="artwork-card">
                     {{-- Image --}}
-                    <div class="artwork-image">
+                    <div class="artwork-image-wrapper">
                         @if($art['image_url'])
                             <img src="{{ $art['image_url'] }}" alt="{{ $art['title'] }}">
+
+                            {{-- Icons Container --}}
+                            <div class="artwork-icons">
+                                {{-- Download Icon --}}
+                                <button wire:click="downloadArtwork({{ $art['id'] }})" class="artwork-icon" title="Download">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17h14a2 2 0 002-2v-1a2 2 0 00-2-2h-3v-4H10v4H7a2 2 0 00-2 2v1a2 2 0 002 2z"/>
+                                    </svg>
+                                </button>
+                               {{-- Favorite Icon --}}
+                                <button wire:click="toggleFavorite({{ $art['id'] }})" class="artwork-icon">
+                                    @if(in_array($art['id'], $favorites ?? []))
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                                    2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+                                                    C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+                                                    c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5
+                                                    4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5
+                                                    4.5 0 00-6.364 0z"/>
+                                        </svg>
+                                    @endif
+                                </button>
+                            </div>
                         @else
                             <span>No image</span>
                         @endif

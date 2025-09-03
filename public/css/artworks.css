@@ -1,107 +1,145 @@
-/* artworks.css */
-
-/* Page wrapper */
+/* ---- Page Layout ---- */
 .artworks-page {
-    width: 100%;
-    max-width: 100%;
-    padding: 24px;
+    padding: 1.5rem;
+    background: #f9fafb;
 }
 
-/* Search bar container */
+/* ---- Search Bar ---- */
 .artworks-search {
     display: flex;
-    flex-direction: row;   /* ✅ put input + button in same row */
     align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
 }
 
-/* Make input expand */
 .artworks-search-wrapper {
     flex: 1;
 }
 
-/* Grid container */
+/* ---- Grid ---- */
 .artworks-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
-    width: 100%;
+    gap: 1.5rem;
 }
 
-/* Card */
+/* ---- Artwork Card ---- */
 .artwork-card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    border-radius: 1rem;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Card image */
-.artwork-image {
-    height: 192px;
+.artwork-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ---- Image Wrapper ---- */
+.artwork-image-wrapper {
+    position: relative;
     width: 100%;
-    background: #f3f4f6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
 }
 
-.artwork-image img {
+.artwork-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-/* Card content */
+/* ---- Icons Container ---- */
+.artwork-icons {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 20;
+}
+
+/* ---- Buttons ---- */
+.artwork-icons button,
+.artwork-icons a {
+    width: 38px;
+    height: 38px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.artwork-icons button:hover,
+.artwork-icons a:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.artwork-icons svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+/* ---- Favorite Icon ---- */
+.artwork-icons button svg {
+    fill: #f87171; /* red heart */
+}
+
+/* ---- Download Icon ---- */
+.artwork-icons a svg {
+    fill: white; /* download icon */
+}
+
+/* ---- Content ---- */
 .artwork-content {
-    padding: 16px;
+    padding: 1rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    justify-content: space-between;
 }
 
 .artwork-title {
-    color: #1f2937;
+    font-size: 1rem;
     font-weight: 600;
-    font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin: 0 0 0.5rem;
+    color: #111827;
 }
 
 .artwork-artist {
-    color: #4b5563;
-    font-size: 12px;
-    margin-top: 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 0.9rem;
+    color: #374151;
+    margin: 0 0 0.25rem;
 }
 
 .artwork-date {
+    font-size: 0.8rem;
     color: #6b7280;
-    font-size: 12px;
-    margin-top: 4px;
+    margin: 0;
 }
 
-/* Empty state */
+/* ---- Empty State ---- */
 .artworks-empty {
-    grid-column: 1 / -1;
     text-align: center;
     color: #6b7280;
-    padding: 64px 0;
+    font-size: 1rem;
+    padding: 2rem;
+    grid-column: 1 / -1;
 }
 
-/* Pagination */
+/* ---- Pagination ---- */
 .artworks-pagination {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 1rem;
 }
