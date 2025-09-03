@@ -24,7 +24,7 @@ Ensure you have the following installed on your system:
 
 ### 3. Clone the Laravel Project
 ```sh
-[git clone https://github.com/your-repo/your-project.git](https://github.com/Zaid-Ahmed-404/Artfolio.git)
+git clone https://github.com/your-repo/your-project.git
 cd your-project
 ```
 
