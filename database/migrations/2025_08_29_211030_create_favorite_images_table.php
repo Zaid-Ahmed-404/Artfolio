@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->foreign('my_image_id')->references('id')->on('my_images')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('image_type', ['myImage', 'api']);
             $table->string('api_image_url')->nullable();
+            $table->string('api_title')->nullable();
+            $table->string('api_description')->nullable();
             $table->timestamps();
         });
     }

@@ -133,6 +133,6 @@ class ArtGallery extends Page
             return;
         }
         Log::info('image = ' . $artwork['image_url']);
-        $this->imageController->saveFavoriteImage(Auth::id(), null, "api", $artwork['image_url']);
+        $this->imageController->saveFavoriteImage(Auth::id(), null, "api", $artwork['image_url'], $artwork['title'], $artwork['artist']);
     }
 }

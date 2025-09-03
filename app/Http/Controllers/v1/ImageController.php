@@ -9,7 +9,7 @@ use App\Models\FavoriteImage;
 class ImageController extends Controller
 {
     //
-    public function saveFavoriteImage($userId, $myImageId, $imageType, $apiImageUrl)
+    public function saveFavoriteImage($userId, $myImageId, $imageType, $apiImageUrl, $apiTitle = null, $apiDescription = null)
     {
         if ($imageType === "myImage") {
             $favoriteImage = FavoriteImage::where([['user_id', $userId], ['my_image_id', $myImageId]])->firstOrNew();
@@ -23,6 +23,8 @@ class ImageController extends Controller
             $favoriteImage->user_id = $userId;
             $favoriteImage->api_image_url = $apiImageUrl;
             $favoriteImage->image_type = "api";
+            $favoriteImage->api_title = $apiTitle;
+            $favoriteImage->api_description = $apiDescription;
             $favoriteImage->save();
             return $favoriteImage;
         } else {
